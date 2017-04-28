@@ -18,10 +18,8 @@ public class Savings extends Account {
 	public boolean deposit(float amount) {
 		if (getState() != State.CLOSED && amount > 0.0f) {
 			balance = balance + amount - 0.50F;
-			if (balance >= 0.0f) {
-				setState(State.OPEN);
-			}
 		}
+		setState();
 		return false;
 	}
 
@@ -35,10 +33,7 @@ public class Savings extends Account {
 			numWithdraws++;
 			if (numWithdraws > 3)
 				balance = balance - 1.0f;
-			
-			if (balance < 0.0f) {
-				setState(State.OVERDRAWN);
-			}
+			setState();
 			return true;
 		}
 		return false;

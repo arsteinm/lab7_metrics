@@ -65,8 +65,14 @@ public abstract class Account implements java.io.Serializable {
         return state;
     }
 
-    protected final void setState(State s) {
-        state = s;
+    protected final void setState() {
+        if (balance > 0){
+        	state = State.OPEN;
+        } else if (balance < 0){
+        	state = State.OVERDRAWN;
+        } else {
+        	state = State.CLOSED;
+        }
     }
 
     public String toString() {
